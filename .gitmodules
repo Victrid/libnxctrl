@@ -1,0 +1,9 @@
+[submodule "nxbt"]
+	path = src/libnxctrl/nxbt
+	url = git@github.com:Brikwerk/nxbt.git
+[submodule "mart1no_joycontrol"]
+	path = src/libnxctrl/mart1no_joycontrol
+	url = git@github.com:mart1nro/joycontrol.git
+[submodule "Poohl_joycontrol"]
+	path = src/libnxctrl/Poohl_joycontrol
+	url = git@github.com:Poohl/joycontrol.git
