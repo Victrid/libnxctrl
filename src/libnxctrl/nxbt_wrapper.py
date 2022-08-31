@@ -1,6 +1,30 @@
-from .nxbt.nxbt import Buttons as NXBT_Buttons, Nxbt, PRO_CONTROLLER
-from .nxbt.nxbt.cli import get_reconnect_target
+from .nxbt.nxbt import Buttons as NXBT_Buttons, Nxbt, PRO_CONTROLLER, find_devices_by_alias
 from .wrapper import Button, NXWrapper
+
+
+def check_bluetooth_address(address: str) -> None:
+    """Check the validity of a given Bluetooth MAC address
+
+    :param address: A Bluetooth MAC address
+    :type address: str
+    :raises ValueError: If the Bluetooth address is invalid
+    """
+
+    address_bytes = len(address.split(":"))
+    if address_bytes != 6:
+        raise ValueError("Invalid Bluetooth address")
+
+
+def get_reconnect_target(reconnect: bool, address: str):
+    if reconnect:
+        reconnect_target = find_devices_by_alias("Nintendo Switch")
+    elif address:
+        check_bluetooth_address(address)
+        reconnect_target = address
+    else:
+        reconnect_target = None
+
+    return reconnect_target
 
 
 class NXBTControl(NXWrapper):
@@ -29,8 +53,8 @@ class NXBTControl(NXWrapper):
         Button.JCR_SL:        NXBT_Buttons.JCR_SL
         }
 
-    def __init__(self, press_duration_ms: int = 50):
-        reconnect_target = get_reconnect_target()
+    def __init__(self, press_duration_ms: int = 50, reconnect: bool = False, address: str = None):
+        reconnect_target = get_reconnect_target(reconnect, address)
         super().__init__(press_duration_ms=press_duration_ms)
         self.nx = Nxbt()
 

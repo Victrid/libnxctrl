@@ -14,7 +14,6 @@ class Mart1noJoyControl(NXWrapper):
         super().__init__(press_duration_ms)
         if not os.geteuid() == 0:
             raise PermissionError('Script must be run as root!')
-        hid = HidDevice(device_id=None)
         transport, protocol = asyncio.run(create_hid_server(
                 controller_protocol_factory(Controller.from_arg("PRO_CONTROLLER"), spi_flash=FlashMemory()),
                 ctl_psm=17,
