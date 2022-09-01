@@ -85,7 +85,7 @@ class NXBTControl(NXWrapper):
         self.nx.press_buttons(controller_index=self.controller_idx,
                               buttons=[self.button_map[button]],
                               down=duration_ms / 1000,
-                              up=self.delay_ms,
+                              up=self.delay_ms / 1000,
                               block=True
                               )
 
@@ -104,7 +104,6 @@ class NXBTControl(NXWrapper):
                                                      )
             button_list.append(button_press)
         macro = "\n".join(button_list)
-        print(macro)
         self.nx.macro(self.controller_idx, macro, block=True)
 
     def disconnect(self):
