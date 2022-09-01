@@ -26,7 +26,7 @@ setup(
         install_requires=[
             # NXBT requirements
             "dbus-python~=1.2.16",
-            "Flask~=1.1.2",
+            "Flask>=1.1.2,<2.3.0",
             "Flask-SocketIO~=5.0.1",
             "eventlet~=0.31.0",
             "blessed~=1.17.10",
