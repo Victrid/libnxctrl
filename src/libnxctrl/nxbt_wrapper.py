@@ -55,9 +55,9 @@ class NXBTControl(NXWrapper):
         Button.JCR_SL:        NXBT_Buttons.JCR_SL
         }
 
-    def __init__(self, press_duration_ms: int = 50, reconnect: bool = False, address: str = None):
+    def __init__(self, press_duration_ms: int = 50, delay_ms: int=50, reconnect: bool = False, address: str = None):
         reconnect_target = get_reconnect_target(reconnect, address)
-        super().__init__(press_duration_ms=press_duration_ms)
+        super().__init__(press_duration_ms=press_duration_ms, delay_ms=delay_ms)
         self.nx = Nxbt()
 
         # Get a list of all available Bluetooth adapters
@@ -85,6 +85,7 @@ class NXBTControl(NXWrapper):
         self.nx.press_buttons(controller_index=self.controller_idx,
                               buttons=[self.button_map[button]],
                               down=duration_ms / 1000,
+                              up=self.delay_ms,
                               block=True
                               )
 
@@ -94,12 +95,12 @@ class NXBTControl(NXWrapper):
             if isinstance(button, tuple):
                 button_press = "{} {}s\n {}s".format(self.button_map[button[0]],
                                                      button[1] / 1000,
-                                                     self.press_duration_ms / 1000
+                                                     self.delay_ms
                                                      )
             elif isinstance(button, Button):
                 button_press = "{} {}s\n {}s".format(self.button_map[button],
                                                      self.press_duration_ms / 1000,
-                                                     self.press_duration_ms / 1000
+                                                     self.delay_ms
                                                      )
         macro = "\n".join(button_list)
         print(macro)

@@ -29,8 +29,9 @@ class Button(Enum):
 
 
 class NXWrapper:
-    def __init__(self, press_duration_ms: int = 50):
+    def __init__(self, press_duration_ms: int = 50, delay_ms: int = 120):
         self.press_duration_ms = press_duration_ms
+        self.delay_ms = delay_ms
 
     @abstractmethod
     def connect(self):
