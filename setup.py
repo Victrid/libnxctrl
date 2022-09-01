@@ -32,7 +32,7 @@ setup(
             "blessed~=1.17.10",
             "pynput~=1.7.1",
             "psutil~=5.6.6",
-            "cryptography~=3.3.2",
+            "cryptography>=3.3.2,<37.1.0",
             # JoyControl requirements
             'hid~=1.0.5',
             'aioconsole~=0.5.1'
