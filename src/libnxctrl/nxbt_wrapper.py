@@ -1,3 +1,5 @@
+from typing import Union
+
 from .nxbt.nxbt import Buttons as NXBT_Buttons, Nxbt, PRO_CONTROLLER, find_devices_by_alias
 from .wrapper import Button, NXWrapper
 
@@ -85,6 +87,23 @@ class NXBTControl(NXWrapper):
                               down=duration_ms / 1000,
                               block=True
                               )
+
+    def series_press(self, button_names: list[Union[Button, tuple[Button, int]]]):
+        button_list = []
+        for button in button_names:
+            if isinstance(button, tuple):
+                button_press = "{} {}s\n {}s".format(self.button_map[button[0]],
+                                                     button[1] / 1000,
+                                                     self.press_duration_ms / 1000
+                                                     )
+            elif isinstance(button, Button):
+                button_press = "{} {}s\n {}s".format(self.button_map[button],
+                                                     self.press_duration_ms / 1000,
+                                                     self.press_duration_ms / 1000
+                                                     )
+        macro = "\n".join(button_list)
+        print(macro)
+        self.nx.macro(self.controller_idx, macro, block=True)
 
     def disconnect(self):
         pass

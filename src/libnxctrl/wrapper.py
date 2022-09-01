@@ -1,5 +1,6 @@
 from abc import abstractmethod
 from enum import Enum
+from typing import Union
 
 
 class Button(Enum):
@@ -53,6 +54,17 @@ class NXWrapper:
         """
         return self.button_hold(button_name, self.press_duration_ms)
 
+    def series_press(self, button_names: list[Union[Button, tuple[Button, int]]]):
+        """
+        Press a series of buttons.
+        :param button_names: A list of button names.
+        """
+        for button_name in button_names:
+            if isinstance(button_name, tuple):
+                self.button_hold(button_name[0], button_name[1])
+            else:
+                self.button_press(button_name)
+
     @abstractmethod
     def disconnect(self):
         pass
@@ -65,4 +77,3 @@ class NXWrapper:
     def __exit__(self, exc_type, exc_value, traceback):
         self.disconnect()
         return False
-

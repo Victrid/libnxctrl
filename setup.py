@@ -7,7 +7,7 @@ long_description = (this_directory / "README.md").read_text()
 
 setup(
         name='libnxctrl',
-        version='0.1.3',
+        version='0.1.4',
         url='https://github.com/Victrid/libnxctrl',
         license='GPLv3',
         author='Weihao Jiang',
@@ -26,13 +26,13 @@ setup(
         install_requires=[
             # NXBT requirements
             "dbus-python~=1.2.16",
-            "Flask~=1.1.2",
-            "Flask-SocketIO~=5.0.1",
-            "eventlet~=0.31.0",
-            "blessed~=1.17.10",
+            "Flask>=1.1.2,<2.3.0",
+            "Flask-SocketIO>=5.0.1,<5.4.0",
+            "eventlet>=0.31,<0.34",
+            "blessed>=1.17.10,<1.20.0",
             "pynput~=1.7.1",
             "psutil~=5.6.6",
-            "cryptography~=3.3.2",
+            "cryptography>=3.3.2,<37.1.0",
             # JoyControl requirements
             'hid~=1.0.5',
             'aioconsole~=0.5.1'
