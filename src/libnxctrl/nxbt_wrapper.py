@@ -95,13 +95,14 @@ class NXBTControl(NXWrapper):
             if isinstance(button, tuple):
                 button_press = "{} {}s\n {}s".format(self.button_map[button[0]],
                                                      button[1] / 1000,
-                                                     self.delay_ms
+                                                     self.delay_ms / 1000
                                                      )
-            elif isinstance(button, Button):
+            else:
                 button_press = "{} {}s\n {}s".format(self.button_map[button],
                                                      self.press_duration_ms / 1000,
-                                                     self.delay_ms
+                                                     self.delay_ms / 1000
                                                      )
+            button_list.append(button_press)
         macro = "\n".join(button_list)
         print(macro)
         self.nx.macro(self.controller_idx, macro, block=True)
