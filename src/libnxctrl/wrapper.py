@@ -1,34 +1,39 @@
 from abc import abstractmethod
-from enum import Enum
+from enum import Flag, auto
 from typing import Union
 
 
-class Button(Enum):
-    A = 0
-    B = 1
-    X = 2
-    Y = 3
-    DPAD_UP = 4
-    DPAD_DOWN = 5
-    DPAD_LEFT = 6
-    DPAD_RIGHT = 7
-    L_STICK_PRESS = 8
-    R_STICK_PRESS = 9
-    SHOULDER_L = 10
-    SHOULDER_R = 11
-    SHOULDER_ZL = 12
-    SHOULDER_ZR = 13
-    HOME = 14
-    CAPTURE = 15
-    MINUS = 16
-    PLUS = 17
-    JCL_SR = 18
-    JCL_SL = 19
-    JCR_SR = 20
-    JCR_SL = 21
+class Button(Flag):
+    A = auto()
+    B = auto()
+    X = auto()
+    Y = auto()
+    DPAD_UP = auto()
+    DPAD_DOWN = auto()
+    DPAD_LEFT = auto()
+    DPAD_RIGHT = auto()
+    L_STICK_PRESS = auto()
+    R_STICK_PRESS = auto()
+    SHOULDER_L = auto()
+    SHOULDER_R = auto()
+    SHOULDER_ZL = auto()
+    SHOULDER_ZR = auto()
+    HOME = auto()
+    CAPTURE = auto()
+    MINUS = auto()
+    PLUS = auto()
+    JCL_SR = auto()
+    JCL_SL = auto()
+    JCR_SR = auto()
+    JCR_SL = auto()
 
 
 class NXWrapper:
+    support_combo = False
+
+    def combo_supported(self):
+        return self.support_combo
+
     def __init__(self, press_duration_ms: int = 50, delay_ms: int = 120):
         self.press_duration_ms = press_duration_ms
         self.delay_ms = delay_ms

@@ -7,7 +7,7 @@ long_description = (this_directory / "README.md").read_text()
 
 setup(
         name='libnxctrl',
-        version='0.1.7',
+        version='0.2.0',
         url='https://github.com/Victrid/libnxctrl',
         license='GPLv3',
         author='Weihao Jiang',
@@ -21,22 +21,32 @@ setup(
             "License :: OSI Approved :: GNU General Public License v3 (GPLv3)",
             "Natural Language :: English",
             "Operating System :: POSIX :: Linux",
+            "Operating System :: MacOS :: MacOS X",
+            "Operating System :: Microsoft :: Windows",
             "Programming Language :: Python :: 3",
+            "Programming Language :: Python :: 3.9",
             ],
-        install_requires=[
-            # NXBT requirements
-            "dbus-python~=1.2.16",
-            "Flask>=1.1.2,<2.3.0",
-            "Flask-SocketIO>=5.0.1,<5.4.0",
-            "eventlet>=0.31,<0.34",
-            "blessed>=1.17.10,<1.20.0",
-            "pynput~=1.7.1",
-            "psutil~=5.6.6",
-            "cryptography>=3.3.2,<37.1.0",
-            # JoyControl requirements
-            'hid~=1.0.5',
-            'aioconsole~=0.5.1'
-            ],
+        python_requires='>=3.9',
+        install_requires=[],
+        extras_require={
+            "nxbt":       [
+                "dbus-python~=1.2.16",
+                "Flask>=1.1.2,<2.3.0",
+                "Flask-SocketIO>=5.0.1,<5.4.0",
+                "eventlet>=0.31,<0.34",
+                "blessed>=1.17.10,<1.20.0",
+                "pynput~=1.7.1",
+                "psutil~=5.6.6",
+                "cryptography>=3.3.2,<37.1.0",
+                ],
+            "joycontrol": [
+                'hid~=1.0.5',
+                'aioconsole~=0.5.1'
+                ],
+            "usb":        [
+                "pyserial~=3.5",
+                ]
+            },
         packages=[
             "libnxctrl",
             "libnxctrl.nxbt.nxbt",
