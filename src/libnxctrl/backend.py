@@ -25,6 +25,8 @@ def get_available_backend() -> list[str]:
     except ImportError:
         pass
 
+    available_backend.append("Remote")
+
     return available_backend
 
 
@@ -43,5 +45,8 @@ def get_backend(backend_name: str) -> Type[NXWrapper]:
     elif backend_name == "Splatplost USB":
         from .splatplost_USB import SplatplostUSBControl
         return SplatplostUSBControl
+    elif backend_name == "Remote":
+        from .rpc import RemoteControlClient
+        return RemoteControlClient
     else:
         raise ValueError(f"Backend {backend_name} is not available.")
