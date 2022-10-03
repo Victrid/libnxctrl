@@ -7,7 +7,8 @@ long_description = (this_directory / "README.md").read_text()
 
 setup(
         name='libnxctrl',
-        version='0.2.0',
+        version='0.2.1',
+        scripts=['src/libnxctrl/libnxctrld'],
         url='https://github.com/Victrid/libnxctrl',
         license='GPLv3',
         author='Weihao Jiang',

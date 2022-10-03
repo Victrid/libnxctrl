@@ -1,0 +1,25 @@
+#!env python
+import argparse
+from xmlrpc.server import SimpleXMLRPCServer
+
+from libnxctrl.rpc import RemoteControlServer
+
+
+def main(host, port):
+    server = SimpleXMLRPCServer((host, port))
+    print("Listening on `http://{}:{}`".format(host, port))
+    print("Use Control-C to exit")
+    server.register_introspection_functions()
+    server.register_instance(RemoteControlServer())
+    server.serve_forever()
+
+
+if __name__ == "__main__":
+    argument_parser = argparse.ArgumentParser()
+    argument_parser.add_argument("--host", default="0.0.0.0",
+                                 help="Host to bind to (default to be 0.0.0.0, listens on all interfaces)"
+                                 )
+    argument_parser.add_argument("--port", default=15973, type=int, help="Port to bind to (default to be 15973)")
+    args = argument_parser.parse_args()
+
+    main(args.host, args.port)
