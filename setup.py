@@ -30,7 +30,7 @@ setup(
         install_requires=[],
         extras_require={
             "nxbt":       [
-                "dbus-python~=1.2.16",
+                "dbus-python>=1.2.16,<1.4.0",
                 "Flask>=1.1.2,<2.3.0",
                 "Flask-SocketIO>=5.0.1,<5.4.0",
                 "eventlet>=0.31,<0.34",
