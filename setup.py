@@ -42,7 +42,7 @@ setup(
                 ],
             "joycontrol": [
                 'hid~=1.0.5',
-                'aioconsole~=0.5.1'
+                'aioconsole>=0.5.1,<0.7.0'
                 ],
             "usb":        [
                 "pyserial~=3.5",
